@@ -1,0 +1,28 @@
+[
+  {
+    "type": "Header",
+    "value": "medium header",
+    "props": { "size": "md" }
+  },
+  {
+    "type": "Text",
+    "value": "Text value"
+  },
+  {
+    "type": "Image",
+    "value": "https://i.postimg.cc/zBqg1Q1T/image.png",
+    "props": {"description": "Image description"}
+  },
+  {
+    "type": "Divider"
+  },
+  {
+    "type": "YouTube",
+    "value": "dt76detwvd8"
+  },
+  {
+    "type": "Code",
+    "value": "// loggin to console:\n   console.log(\"Hello World\")",
+    "props": {"language": "javascript" }
+  }
+]
