@@ -21,13 +21,13 @@ function changeToMDX() {
 function processComponent(component) {
   switch (component.type) {
     case 'Text':
-      return component.value //todo: change ins into code
+      return processText(component.value) 
     case 'Header':
       return `### ${component.value}`
     case 'Divider':
       return '<hr/>'
     case 'YouTube':
-      return `<YT src={"${component.value}"}/>`
+      return `<YT id={"${component.value}"}/>`
     case 'Image':
       return `<Image src={"${component.value}"} description="${component.props.description}"/>`
     case 'Code':
@@ -36,6 +36,26 @@ function processComponent(component) {
       return ''
   }
 }
+
+function processText(text) {
+  // Zamieniamy <ins> na <code>, jeśli nie ma klasy "hint"
+  text = text.replace(
+    /<ins(?![^>]*class=["']hint["'])[^>]*>(.*?)<\/ins>/g,
+    '<code>$1</code>'
+  )
+
+  // Usuwamy <ins> całkowicie, jeśli posiada klasę "hint"
+  text = text.replace(/<ins[^>]*class=["']hint["'][^>]*>(.*?)<\/ins>/g, '$1')
+
+  // Zamieniamy <br>, <br/> i </br> na dwie nowe linie
+  text = text.replace(/<br\s*\/?>|<\/br>/g, '\n')
+
+  return text
+}
+
+
+
+
 
 // Dodajemy nasłuchiwanie na kliknięcie przycisku
 button.addEventListener('click', changeToMDX)

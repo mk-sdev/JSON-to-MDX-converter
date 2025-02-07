@@ -6,7 +6,7 @@
   },
   {
     "type": "Text",
-    "value": "Text value"
+    "value": "Text <ins data-key='context' class='hint'>hint</ins> <br></br> <ins>code</ins>"
   },
   {
     "type": "Image",
@@ -15,6 +15,10 @@
   },
   {
     "type": "Divider"
+  },
+  {
+    "type": "Ad",
+    "value": "should-display-nothing"
   },
   {
     "type": "YouTube",
