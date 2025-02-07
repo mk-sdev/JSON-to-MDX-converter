@@ -44,5 +44,12 @@
     "props": {
       "type": "info"
     }
+  },
+  {
+    "type": "List",
+    "value": [
+      "<u>1</u>: first item",
+      "<u>2</u>: second item"
+    ]
   }
 ]
