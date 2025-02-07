@@ -28,5 +28,21 @@
     "type": "Code",
     "value": "// loggin to console:\n   console.log(\"Hello World\")",
     "props": {"language": "javascript" }
+  },
+  {
+    "type": "Block",
+    "value": [
+      {
+        "type": "Text",
+        "value": "Text inside Block"
+      },
+      {
+        "type": "YouTube",
+        "value": "dt76detwvd8"
+      }
+    ],
+    "props": {
+      "type": "info"
+    }
   }
 ]
