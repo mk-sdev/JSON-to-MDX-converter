@@ -11,7 +11,7 @@
   {
     "type": "Image",
     "value": "https://i.postimg.cc/zBqg1Q1T/image.png",
-    "props": {"description": "Image description"}
+    "props": { "description": "Image description" }
   },
   {
     "type": "Divider"
@@ -27,7 +27,7 @@
   {
     "type": "Code",
     "value": "// loggin to console:\n   console.log(\"Hello World\")",
-    "props": {"language": "javascript" }
+    "props": { "language": "javascript" }
   },
   {
     "type": "Block",
@@ -48,8 +48,10 @@
   {
     "type": "List",
     "value": [
-      "<u>1</u>: first item",
-      "<u>2</u>: second item"
+      "<b>1</b>. Initially, <ins>a</ins> is true and <ins>b</ins> is false.",
+      "<b>2</b>. The operation <ins>a &&= b</ins> performs a logical AND operation between <ins>a</ins> and <ins>b</ins>, which results in false.",
+      "<b>3</b>. The result of the logical AND operation is then assigned back to <ins>a</ins>.",
+      "<b>4</b>. After the operation, <ins>a</ins> is false."
     ]
   }
 ]

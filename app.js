@@ -24,7 +24,7 @@ function processComponent(component) {
       return processText(component.value)
     case 'List':
       let items = component.value
-      return `- ${items.join('\n- ')}`
+      return processText(`- ${items.join('\n- ')}`)
     case 'Header':
       return `### ${component.value}\n\n`
     case 'Divider':
