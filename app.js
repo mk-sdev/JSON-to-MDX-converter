@@ -10,10 +10,27 @@ function changeToMDX() {
   let out = ''
   let component = ''
 
-  inputValue.forEach(a => {
-    component = processComponent(a)
-    out += component
-  })
+  // If a whole JSON file passed
+  if (inputValue[0].data) {
+    inputValue.forEach((JSONSegment, i) => {
+      let title = JSONSegment.title
+      if (title && title !== '') out += '## ' + JSONSegment.title + '\n\n'
+      else if (i === 0) {
+      } else out += '<hr />\n\n'
+
+      JSONSegment.data.forEach(JSONComponent => {
+        component = processComponent(JSONComponent)
+        out += component
+      })
+    })
+  }
+  // If a single segment passed
+  else
+    inputValue.forEach(JSONComponent => {
+      component = processComponent(JSONComponent)
+      out += component
+    })
+
   console.log(out)
   output.textContent = out // Wyświetlamy w output
 }
