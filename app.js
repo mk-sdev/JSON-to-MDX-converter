@@ -10,8 +10,13 @@ function changeToMDX() {
   let out = ''
   let component = ''
 
+  // If a single component passed
+  if (!Array.isArray(inputValue)) {
+    component = processComponent(inputValue)
+    out += component
+  }
   // If a whole JSON file passed
-  if (inputValue[0].data) {
+  else if (inputValue[0].data) {
     inputValue.forEach((JSONSegment, i) => {
       let title = JSONSegment.title
       if (title && title !== '') out += '## ' + JSONSegment.title + '\n\n'
