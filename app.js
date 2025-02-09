@@ -12,7 +12,7 @@ function changeToMDX() {
 
   inputValue.forEach(a => {
     component = processComponent(a)
-    out += component 
+    out += component
   })
   console.log(out)
   output.textContent = out // Wyświetlamy w output
@@ -32,7 +32,9 @@ function processComponent(component) {
     case 'YouTube':
       return `<YT id={"${component.value}"}/>\n\n`
     case 'Image':
-      return `<Image src={"${component.value}"} description="${component.props.description}"/>\n\n`
+      if (component.props)
+        return `<Img src={"${component.value}"} description="${component.props.description}"/>\n\n`
+      else return `<Img src={"${component.value}"} />\n\n`
     case 'Code':
       return `\`\`\`${component.props.language}\n${component.value}\n\`\`\`\n\n` // Obsługa komponentu Code
     case 'Block':
@@ -66,10 +68,6 @@ function processText(text) {
 
   return text
 }
-
-
-
-
 
 // Dodajemy nasłuchiwanie na kliknięcie przycisku
 button.addEventListener('click', changeToMDX)
