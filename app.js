@@ -9,6 +9,7 @@ function changeToMDX() {
 
   let out = ''
   let component = ''
+  let imports = new Set()
 
   // If a single component passed
   if (!Array.isArray(inputValue)) {
@@ -24,7 +25,7 @@ function changeToMDX() {
       } else out += '<hr />\n\n'
 
       JSONSegment.data.forEach(JSONComponent => {
-        component = processComponent(JSONComponent)
+        component = processComponent(JSONComponent, imports)
         out += component
       })
     })
@@ -36,11 +37,14 @@ function changeToMDX() {
       out += component
     })
 
+  if (imports.size>0) out = [...imports].join('\n') + '\n\n' + out
+
   console.log(out)
   output.textContent = out // Wyświetlamy w output
+  navigator.clipboard.writeText(out)
 }
 
-function processComponent(component) {
+function processComponent(component, imports) {
   switch (component.type) {
     case 'Text':
       return processText(component.value)
@@ -52,20 +56,27 @@ function processComponent(component) {
     case 'Divider':
       return '<hr/>\n\n'
     case 'YouTube':
-      return `<YT id={"${component.value}"}/>\n\n`
+      if (imports) imports.add('import YT from "../../../components/YT.astro"')
+      return `<YT id={"${component.value}"} />\n\n`
     case 'Image':
+      if (imports)
+        imports.add('import Img from "../../../components/Img.astro"')
       if (component.props)
         return `<Img src={"${component.value}"} description="${component.props.description}"/>\n\n`
       else return `<Img src={"${component.value}"} />\n\n`
     case 'Code':
       return `\`\`\`${component.props.language}\n${component.value}\n\`\`\`\n\n` // Obsługa komponentu Code
     case 'Block':
+      if (imports)
+        imports.add('import Aside from "../../../components/Aside.astro"')
       let type = component.props.type
       if (type === 'info') type = 'note'
       else if (type === 'warning') type = 'caution'
 
       // Przetwarzamy zawartość Block rekurencyjnie
-      const blockContent = component.value.map(processComponent).join('')
+      const blockContent = component.value
+        .map(c => processComponent(c, imports))
+        .join('')
 
       return `<Aside type="${type}">\n\n${blockContent}</Aside>\n\n`
     default:
