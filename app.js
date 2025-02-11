@@ -21,8 +21,8 @@ function changeToMDX() {
     inputValue.forEach((JSONSegment, i) => {
       let title = JSONSegment.title
       if (title && title !== '') out += '## ' + JSONSegment.title + '\n\n'
-      else if (i === 0) {
-      } else out += '<hr />\n\n'
+      // else if (i === 0) {
+      // } else out += '<hr />\n\n'
 
       JSONSegment.data.forEach(JSONComponent => {
         component = processComponent(JSONComponent, imports)
@@ -74,6 +74,7 @@ function processComponent(component, imports) {
       let type = component.props.type
       if (type === 'info') type = 'note'
       else if (type === 'warning') type = 'caution'
+      else if (type === 'important') type = 'danger'
 
       // Przetwarzamy zawartość Block rekurencyjnie
       const blockContent = component.value
@@ -90,7 +91,7 @@ function processText(text) {
   // Zamieniamy <ins> na <code>, jeśli nie ma klasy "hint"
   text = text.replace(
     /<ins(?![^>]*class=["']hint["'])[^>]*>(.*?)<\/ins>/g,
-    '<code>$1</code>'
+    '`$1`'
   )
 
   // Usuwamy <ins> całkowicie, jeśli posiada klasę "hint"
